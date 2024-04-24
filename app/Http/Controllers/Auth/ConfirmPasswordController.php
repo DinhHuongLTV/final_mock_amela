@@ -65,12 +65,9 @@ class ConfirmPasswordController extends Controller
 
         $this->resetPasswordConfirmationTimeout($request);
 
-        // Mail::send([], [], function ($message) use($request) {
-        //     $message->to('huongdao916@gmail.com')
-        //       ->subject('Xin chào '. $request->email)
-        //       ->setBody('hello', 'text/html'); // for HTML rich messages
-        //   });
+        // Send mail confirm
 
+        // 
         return $request->wantsJson()
                     ? new JsonResponse([], 204)
                     : redirect()->intended($this->redirectPath());

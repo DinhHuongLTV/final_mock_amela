@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+// use Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,5 +30,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/admin', function() {
-    return '<h1>Admin dashboard</h1>';
+    return view('admin.admin');
 });
