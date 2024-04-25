@@ -100,7 +100,12 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        if(Gate::allows('delete-post', $post)) {
+            $post->delete();
+            return redirect()->back()->with('msg', 'Xoá bài viết thành công');
+        }
+        return redirect()->back()->withErrors(['message' => 'Bạn không có quyền này']);
     }
 
     public function getUserPost() {

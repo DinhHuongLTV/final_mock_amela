@@ -40,7 +40,6 @@
                                         <a class="dropdown-item" href="{{ url('admin/post/create') }}">
                                             Create a new post
                                         </a>
-                                        <hr>
                                         <a href="{{ url('admin/post/your-post') }}" class="dropdown-item">
                                             Your posts
                                         </a>
@@ -107,3 +106,4 @@
     </footer>
 </body>
 </html>
+@yield('js')

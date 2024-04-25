@@ -17,8 +17,9 @@ class PostValid
     public function handle(Request $request, Closure $next): Response
     {
         $post = Post::find($request->route('id'));
-        if (!$post) {
-            return redirect()->route('admin_post')->withErorrs(['message' => 'Post không tồn tại']);
+        // dd($post);
+        if (!isset($post)) {
+            return redirect()->back()->withErorrs(['message' => 'Post không tồn tại']);
         }
         return $next($request);
     }

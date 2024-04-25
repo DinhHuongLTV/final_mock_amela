@@ -48,7 +48,7 @@ Route::middleware('auth')->prefix('admin')->group(function() {
         Route::get('update/{id}', [PostController::class, 'edit'])->name('post_update')->middleware('post.valid');
         Route::post('update/{id}', [PostController::class, 'update'])->name('update_post');
 
-        Route::delete('delete/{id}', [PostController::class, 'delete'])->name('post_delete');
+        Route::get('delete/{id}', [PostController::class, 'destroy'])->name('post_delete')->middleware('post.valid');
     });
 });
 
