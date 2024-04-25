@@ -7,14 +7,21 @@
             {{ session('msg') }}
         </div>
     @endif
-    @if (Auth::check())
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        {{ $errors->first('message') }}
+    </div>
+    @endif
+    <div>
+        @if (Auth::check())
         <h2>Chào mừng, {{Auth::user()->name}}</h2> 
         @php
             // $user = Auth::user();
             // dd($user);
         @endphp       
     @else   
-        <h2>Người dùng chưa đăng nhập</h2>
+    <h2>Người dùng chưa đăng nhập</h2>
     @endif
+    </div>
 </div>
 @endsection

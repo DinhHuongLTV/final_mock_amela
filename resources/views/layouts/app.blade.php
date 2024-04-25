@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -29,8 +30,25 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @if (Auth::check())
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Adjust posts 
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ url('admin/post/create') }}">
+                                            Create a new post
+                                        </a>
+                                        <hr>
+                                        <a href="{{ url('admin/post/your-post') }}" class="dropdown-item">
+                                            Your posts
+                                        </a>
+                                    </div>
+                                </li>
+                            @endif
                             <li class="nav-item">
-                                <a href="{{ url('post') }}" class="nav-link">Posts</a>
+                                <a href="{{ url('post') }}" class="nav-link">Posts <i class="fa-solid fa-newspaper"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ '#' }}" class="nav-link">Profile</a>
@@ -61,8 +79,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();"
+                                    >
                                         {{ 'Đăng xuất' }}
                                     </a>
 

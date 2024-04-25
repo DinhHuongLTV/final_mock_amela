@@ -40,9 +40,9 @@
                             </small>
                         </div>
                         <span>{{ Str::limit($post->content, 50) }}</span>
-                        {{-- @if (Auth::user()->is_admin)
+                        @if (Auth::user()->is_admin)
                             <a href="{{ url('post/' . $post->id . '/edit') }}" class="">Edit Post</a>
-                        @endif --}}
+                        @endif
                     </a>
                 @endforeach
             </div>

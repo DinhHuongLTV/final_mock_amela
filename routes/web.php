@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 // use Auth;
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,23 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin', function() {
     return view('admin.admin');
+})->name('dashboard');
+
+Route::get('post', [PostController::class, 'index'])->middleware('auth');
+Route::get('post/{id}', [PostController::class, 'show'])->middleware('auth');
+
+Route::middleware('auth')->prefix('admin')->group(function() {
+    Route::prefix('post')->group(function(){
+        Route::get('create', [PostController::class, 'create'])->name('post_create');
+        Route::post('create', [PostController::class, 'store']); 
+
+        Route::get('your-post', [PostController::class, 'getUserPost'])->name('admin_post');
+
+        Route::get('update/{id}', [PostController::class, 'edit'])->name('post_update')->middleware('post.valid');
+        Route::post('update/{id}', [PostController::class, 'update'])->name('update_post');
+
+        Route::delete('delete/{id}', [PostController::class, 'delete'])->name('post_delete');
+    });
 });
 
-Route::resource('post', PostController::class)->middleware('auth');
+
